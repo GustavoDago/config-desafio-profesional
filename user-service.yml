@@ -2,7 +2,7 @@ server:
   port: ${PORT:${SERVER_PORT:0}}
 spring:
   application:
-    name: Usuarios
+    name: user-service
   datasource:
     url: jdbc:mysql://localhost:3306/digitalmoneyhouse
     driver-class-name: com.mysql.cj.jdbc.Driver
