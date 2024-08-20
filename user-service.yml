@@ -29,12 +29,44 @@ spring:
             authorization-grant-type: client_credentials
         provider:
           ms-user:
-            token-uri: http://localhost:8080/realms/ecommerce-Milene/protocol/openid-connect/token
+            token-uri: http://localhost:8080/realms/digitalmoneyhouse/protocol/openid-connect/token
+        resourceserver:
+          jwt:
+            #issuer-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8080}/realms/${KEYCLOAK_REALM:digitalmoneyhouse}
+            issuer-uri: http://keycloak:${KEYCLOAK_PORT:8080}/realms/${KEYCLOAK_REALM:digitalmoneyhouse}
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:hairphoriastore@gmail.com}
+    password: ${MAIL_PASSWORD:ywwidqyyvhvaortv}
+    link:
+      #verify: http://localhost:8090/users/verify
+      verify: http://gateway:8090/users/verify
+    mail-template: ValidationEmail
+    mail-subject: "Validación de cuenta"
+    redirects:
+      success-verification: http://127.0.0.1:5173/verificacion-exitosa
+      already-verification: https://th.bing.com/th/id/OIP.MZZQpcPj-bjfN2bKPSjcDQHaEl?rs=1&pid=ImgDetMain
+      error-verification: https://verification.swiftchat.ai/images/email_not_verified.png
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+keycloak:
+  realm: digitalmoneyhouse
+  #serverUrl: http://${KEYCLOK_HOST:localhost}:${KEYCLOK_PORT:8080}
+  serverUrl: http://keycloak:8080
+  clientId: users-service
 
 
 queue: # llave de configuración para conocer cómo se llama la cola
   movie:
     name: ColaUsuarios
+    
 eureka:
   client:
     register-with-eureka: true
@@ -50,12 +82,14 @@ eureka:
     prefer-ip-address: false
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
+    
 feign:
   client:
     config:
       default:
         connectTimeout: 5000
         readTimeout: 5000
+        
 logging:
   level:
     root: INFO
