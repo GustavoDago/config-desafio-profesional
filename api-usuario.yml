@@ -23,6 +23,5 @@ app:
   keycloak:
     admin:
       clientId: admin-cli
-      clientSecret: ${CLIENT_SECRET}
     realm: spring
     serverUrl: http://localhost:9081
