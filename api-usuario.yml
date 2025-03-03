@@ -22,6 +22,6 @@ feign:
 app:
   keycloak:
     admin:
-      clientId: admin-cli
+      clientId: app-wallet
     realm: spring
     serverUrl: http://localhost:9081
